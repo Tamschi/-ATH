@@ -48,21 +48,37 @@ namespace _ATH
 
                 if (arg.EndsWith(".~ATH"))
                 {
-                    var program = new _ATHProgram(File.ReadAllText(arg));
-                    program.Compile(Path.GetFileName(arg), new[] { typeof(ProcessImport) });
-                    if (run)
+                    try
                     {
-                        program.Run();
-                    }
-                    else
-                    {
+                        var program = new _ATHProgram(File.ReadAllText(arg));
                         program.Compile(Path.GetFileName(arg), new[] { typeof(ProcessImport) });
-                        program.Save(arg + ".exe");
+                        if (run)
+                        {
+                            program.Run();
+                        }
+                        else
+                        {
+                            program.Save(arg + ".exe");
+                        }
                     }
-                    continue;
+                    catch (Exception ex)
+                    {
+                        while (ex.InnerException != null)
+                        {
+                            Console.WriteLine(ex);
+                            Console.WriteLine();
+                            ex = ex.InnerException;
+                        }
+                        Console.WriteLine(ex.ToString());
+                        Console.ReadLine();
+
+                    }
+                    break;
                 }
 
                 Console.WriteLine("Invalid argument: " + arg);
+                Console.ReadLine();
+                break;
             }
         }
     }
