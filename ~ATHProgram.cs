@@ -199,7 +199,7 @@ namespace _ATH
 #if !NODELAY
             var threadSleep = ((Action<int>)Thread.Sleep).Method;
 
-            ilGenerator.Emit(OpCodes.Ldc_I4, 1000);
+            ilGenerator.Emit(OpCodes.Ldc_I4, 100);
             ilGenerator.EmitCall(OpCodes.Call, threadSleep, null);
 #endif
 
