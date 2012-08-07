@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ *  Copyright 2012 Tamme Schichler <tammeschichler@googlemail.com>
+ * 
+ *  This file is part of ~ATH.
+ *
+ *  ~ATH is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  ~ATH is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with ~ATH.  If not, see <http://www.gnu.org/licenses/>.
+ */
+-->
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F0C8633-987F-494D-B3D7-28F3CBF685A8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_ATH</RootNamespace>
+    <AssemblyName>~ATH</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Colour.cs" />
+    <Compile Include="Expressions\BifurcateExpression.cs" />
+    <Compile Include="Expressions\CommentExpression.cs" />
+    <Compile Include="Expressions\DIEExpression.cs" />
+    <Compile Include="Expressions\ExpressionBlockExpression.cs" />
+    <Compile Include="Expressions\ImportExpression.cs" />
+    <Compile Include="Expressions\THISListDIEExpression.cs" />
+    <Compile Include="Expressions\NULLExpression.cs" />
+    <Compile Include="Expressions\TildeATHExpression.cs" />
+    <Compile Include="ImportHandle.cs" />
+    <Compile Include="Imports\ProcessImport.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenException.cs" />
+    <Compile Include="Tokens\ColouredExpressionsEndingWithTHISListDIEToken.cs" />
+    <Compile Include="Tokens\CurlyCloseDelimitedExpressionListToken.cs" />
+    <Compile Include="Tokens\CurlyOpenToken.cs" />
+    <Compile Include="Tokens\DIEToken.cs" />
+    <Compile Include="Tokens\DotToken.cs" />
+    <Compile Include="Tokens\EverythingExceptNewlineToken.cs" />
+    <Compile Include="Tokens\EXECUTEToken.cs" />
+    <Compile Include="Tokens\ExpressionToken.cs" />
+    <Compile Include="Tokens\MaybeNotToken.cs" />
+    <Compile Include="Tokens\ExpressionOrCommandToken.cs" />
+    <Compile Include="Tokens\CommaToken.cs" />
+    <Compile Include="Tokens\ColourToken.cs" />
+    <Compile Include="Tokens\IsDeadToken.cs" />
+    <Compile Include="Tokens\MaybeColouredNameToken.cs" />
+    <Compile Include="Tokens\SquareCloseToken.cs" />
+    <Compile Include="Tokens\SquareOpenToken.cs" />
+    <Compile Include="Tokens\NameToken.cs" />
+    <Compile Include="Tokens\RoundCloseToken.cs" />
+    <Compile Include="Tokens\RoundOpenToken.cs" />
+    <Compile Include="Tokens\SemicolonToken.cs" />
+    <Compile Include="Tokens\SkipWhitespaceToken.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="~ATHMain.cs" />
+    <Compile Include="~ATHCompileException.cs" />
+    <Compile Include="~ATHExpression.cs" />
+    <Compile Include="~ATHImport.cs" />
+    <Compile Include="~ATHLexer.cs" />
+    <Compile Include="~ATHProgram.cs" />
+    <Compile Include="~ATHToken.cs" />
+    <Compile Include="~ATHTokenType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GPL.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LGPL.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="License.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
