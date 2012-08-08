@@ -52,9 +52,22 @@ namespace _ATH.Expressions
 
         public override void EmitIL(_ATHProgram program, Colour expressionColour, ILGenerator ilGenerator, Dictionary<string, ImportHandle> importHandles, Dictionary<Tuple<string, Colour>, ImportHandle> objects)
         {
-            objects[Tuple.Create(Name, NameColour ?? expressionColour)] = importHandles[Type];
+            var importHandle = importHandles[Type];
+            var colouredName = Tuple.Create(Name, NameColour ?? expressionColour);
 
-            importHandles[Type].EmitImport(program, ilGenerator, TypeColour ?? expressionColour, Tuple.Create(Name, NameColour ?? expressionColour));
+            if (objects.ContainsKey(colouredName))
+            {
+                if (objects[colouredName] != importHandle)
+                {
+                    throw new _ATHParserException("Tried to use same object name and colour with different import types.");
+                }
+            }
+            else
+            {
+                objects[colouredName] = importHandle;
+            }
+
+            importHandle.EmitImport(program, ilGenerator, TypeColour ?? expressionColour, colouredName);
         }
     }
 }
