@@ -19,8 +19,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection.Emit;
 using _ATH.Tokens;
 
@@ -56,7 +54,7 @@ namespace _ATH.Expressions
         {
             objects[Tuple.Create(Name, NameColour ?? expressionColour)] = importHandles[Type];
 
-            importHandles[Type].EmitImport(ilGenerator, TypeColour ?? expressionColour, Tuple.Create(Name, NameColour ?? expressionColour));
+            importHandles[Type].EmitImport(program, ilGenerator, TypeColour ?? expressionColour, Tuple.Create(Name, NameColour ?? expressionColour));
         }
     }
 }

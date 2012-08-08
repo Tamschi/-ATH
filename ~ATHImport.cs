@@ -17,10 +17,6 @@
  *  along with ~ATH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace _ATH
 {
@@ -31,10 +27,10 @@ namespace _ATH
         //
         // Deriving classes must implement:
         //
-        // public static void EmitImport(ILGenerator ilGenerator, byte[] importColour, Tuple<string, Colour> name); // void()
+        // public static void EmitImport(_ATHProgram program, ILGenerator ilGenerator, byte[] importColour, Tuple<string, Colour> name); // void()
         // 
-        // public static void EmitIsAlive(ILGenerator ilGenerator, Tuple<string, Colour> name); // bool()
+        // public static void EmitIsAlive(_ATHProgram program, ILGenerator ilGenerator, Tuple<string, Colour> name); // bool()
         // 
-        // public static void Die(ILGenerator ilGenerator, Tuple<string, Colour> name); // void()
+        // public static void Die(_ATHProgram program, ILGenerator ilGenerator, Tuple<string, Colour> name); // void()
     }
 }

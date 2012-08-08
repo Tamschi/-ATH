@@ -19,13 +19,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.IO;
-using _ATH.Expressions;
 using System.Threading;
+using _ATH.Expressions;
 
 namespace _ATH
 {
@@ -107,6 +105,16 @@ namespace _ATH
             field.SetConstant(0u);
 
             _thisFields.Add(colour, field);
+        }
+
+        public FieldBuilder AddStaticField(string name, Type type, FieldAttributes attributes)
+        {
+            if (name.StartsWith("THIS"))
+            {
+                throw new Exception("Custom static fields can't start with THIS.");
+            }
+
+            return _typeBuilder.DefineField(name, type, attributes | FieldAttributes.Static);
         }
 
         internal void EmitIsTHISAlive(ILGenerator ilGenerator, Colour colour)
@@ -263,9 +271,9 @@ namespace _ATH
                     }
 
                     var keyword = (string)importType.GetProperty("Keyword", typeof(string)).GetGetMethod().Invoke(null, null);
-                    var emitImport = (Action<ILGenerator, Colour, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<ILGenerator, Colour, Tuple<string, Colour>>), importType.GetMethod("EmitImport"));
-                    var emitIsAlive = (Action<ILGenerator, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<ILGenerator, Tuple<string, Colour>>), importType.GetMethod("EmitIsAlive"));
-                    var emitDie = (Action<ILGenerator, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<ILGenerator, Tuple<string, Colour>>), importType.GetMethod("EmitDie"));
+                    var emitImport = (Action<_ATHProgram, ILGenerator, Colour, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<_ATHProgram, ILGenerator, Colour, Tuple<string, Colour>>), importType.GetMethod("EmitImport"));
+                    var emitIsAlive = (Action<_ATHProgram, ILGenerator, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<_ATHProgram, ILGenerator, Tuple<string, Colour>>), importType.GetMethod("EmitIsAlive"));
+                    var emitDie = (Action<_ATHProgram, ILGenerator, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<_ATHProgram, ILGenerator, Tuple<string, Colour>>), importType.GetMethod("EmitDie"));
 
                     importHandles.Add(keyword, new ImportHandle()
                     {

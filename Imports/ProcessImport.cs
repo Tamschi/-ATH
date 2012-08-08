@@ -20,7 +20,6 @@
 using System;
 using System.Diagnostics;
 using System.Reflection.Emit;
-using System.IO;
 
 namespace _ATH.Imports
 {
@@ -28,12 +27,12 @@ namespace _ATH.Imports
     {
         public static string Keyword { get { return "process"; } }
 
-        public static void EmitImport(ILGenerator ilGenerator, Colour importColour, Tuple<string, Colour> name) // void()
+        public static void EmitImport(_ATHProgram program, ILGenerator ilGenerator, Colour importColour, Tuple<string, Colour> name) // void()
         {
             // Empty.
         }
 
-        public static void EmitIsAlive(ILGenerator ilGenerator, Tuple<string, Colour> name) // bool()
+        public static void EmitIsAlive(_ATHProgram program, ILGenerator ilGenerator, Tuple<string, Colour> name) // bool()
         {
             var getProcessesByName = ((Func<string, Process[]>)Process.GetProcessesByName).Method;
 
@@ -42,7 +41,7 @@ namespace _ATH.Imports
             ilGenerator.Emit(OpCodes.Ldlen);
         }
 
-        public static void EmitDie(ILGenerator ilGenerator, Tuple<string, Colour> name) // void()
+        public static void EmitDie(_ATHProgram program, ILGenerator ilGenerator, Tuple<string, Colour> name) // void()
         {
             var getProcessesByName = ((Func<string, Process[]>)Process.GetProcessesByName).Method;
             var killProcess = typeof(Process).GetMethod("Kill");

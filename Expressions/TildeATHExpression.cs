@@ -19,13 +19,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection.Emit;
 using System.Diagnostics;
 using System.IO;
-using _ATH.Tokens;
+using System.Reflection.Emit;
 using System.Threading;
+using _ATH.Tokens;
 
 namespace _ATH.Expressions
 {
@@ -110,7 +108,7 @@ namespace _ATH.Expressions
             else
             {
                 var target = Tuple.Create(Target, TargetColour ?? expressionColour);
-                objects[target].EmitIsAlive(ilGenerator, target);
+                objects[target].EmitIsAlive(program, ilGenerator, target);
                 if (Not)
                 {
                     ilGenerator.Emit(OpCodes.Brtrue, endLabel);

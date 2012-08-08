@@ -19,8 +19,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using _ATH.Expressions;
 
 namespace _ATH.Tokens

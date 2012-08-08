@@ -17,9 +17,9 @@
  *  along with ~ATH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using System;
 using _ATH.Tokens;
 
 namespace _ATH.Expressions
@@ -60,7 +60,7 @@ namespace _ATH.Expressions
             else
             {
                 var target = Tuple.Create(Target, TargetColour ?? expressionColour);
-                objects[target].EmitDie(ilGenerator, target);
+                objects[target].EmitDie(program, ilGenerator, target);
             }
         }
     }

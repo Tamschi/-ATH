@@ -18,9 +18,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection.Emit;
 
 namespace _ATH
@@ -29,8 +26,8 @@ namespace _ATH
     {
         public string Keyword { get; set; }
         public Type Import { get; set; }
-        public Action<ILGenerator, Colour, Tuple<string, Colour>> EmitImport { get; set; }
-        public Action<ILGenerator, Tuple<string, Colour>> EmitIsAlive { get; set; }
-        public Action<ILGenerator, Tuple<string, Colour>> EmitDie { get; set; }
+        public Action<_ATHProgram, ILGenerator, Colour, Tuple<string, Colour>> EmitImport { get; set; }
+        public Action<_ATHProgram, ILGenerator, Tuple<string, Colour>> EmitIsAlive { get; set; }
+        public Action<_ATHProgram, ILGenerator, Tuple<string, Colour>> EmitDie { get; set; }
     }
 }
