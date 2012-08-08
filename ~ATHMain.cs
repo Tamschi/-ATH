@@ -29,10 +29,9 @@ namespace _ATH
     {
         static void Main(string[] args)
         {
-            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var importPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            var importPath = "./Imports/";
-            importPath = Path.GetFullPath(importPath);
+            importPath = Path.Combine(importPath, "./Imports/");
 
             if (!Directory.Exists(importPath))
             {
