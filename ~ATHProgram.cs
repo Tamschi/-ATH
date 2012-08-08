@@ -266,7 +266,6 @@ namespace _ATH
                     var emitImport = (Action<ILGenerator, Colour, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<ILGenerator, Colour, Tuple<string, Colour>>), importType.GetMethod("EmitImport"));
                     var emitIsAlive = (Action<ILGenerator, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<ILGenerator, Tuple<string, Colour>>), importType.GetMethod("EmitIsAlive"));
                     var emitDie = (Action<ILGenerator, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<ILGenerator, Tuple<string, Colour>>), importType.GetMethod("EmitDie"));
-                    var emitExecute = (Action<ILGenerator, Tuple<string, Colour>>)Delegate.CreateDelegate(typeof(Action<ILGenerator, Tuple<string, Colour>>), importType.GetMethod("EmitExecute"));
 
                     importHandles.Add(keyword, new ImportHandle()
                     {
@@ -274,8 +273,7 @@ namespace _ATH
                         Import = importType,
                         EmitImport = emitImport,
                         EmitIsAlive = emitIsAlive,
-                        EmitDie = emitDie,
-                        EmitExecute = emitExecute
+                        EmitDie = emitDie
                     });
                 }
 

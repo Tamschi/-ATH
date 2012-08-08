@@ -32,6 +32,5 @@ namespace _ATH
         public Action<ILGenerator, Colour, Tuple<string, Colour>> EmitImport { get; set; }
         public Action<ILGenerator, Tuple<string, Colour>> EmitIsAlive { get; set; }
         public Action<ILGenerator, Tuple<string, Colour>> EmitDie { get; set; }
-        public Action<ILGenerator, Tuple<string, Colour>> EmitExecute { get; set; }
     }
 }

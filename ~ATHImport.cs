@@ -36,7 +36,5 @@ namespace _ATH
         // public static void EmitIsAlive(ILGenerator ilGenerator, Tuple<string, Colour> name); // bool()
         // 
         // public static void Die(ILGenerator ilGenerator, Tuple<string, Colour> name); // void()
-        // 
-        // public static void Execute(ILGenerator ilGenerator, Tuple<string, Colour> name); // void()
     }
 }

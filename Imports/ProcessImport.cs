@@ -53,16 +53,5 @@ namespace _ATH.Imports
             ilGenerator.Emit(OpCodes.Ldelem_Ref);
             ilGenerator.EmitCall(OpCodes.Callvirt, killProcess, null);
         }
-
-        public static void EmitExecute(ILGenerator ilGenerator, Tuple<string, Colour> name) // void()
-        {
-            var getFullPath = ((Func<string, string>)Path.GetFullPath).Method;
-            var startProcess = ((Func<string, Process>)Process.Start).Method;
-
-            ilGenerator.Emit(OpCodes.Ldstr, name.Item1);
-            ilGenerator.EmitCall(OpCodes.Call, getFullPath, null);
-            ilGenerator.EmitCall(OpCodes.Call, startProcess, null);
-            ilGenerator.Emit(OpCodes.Pop);
-        }
     }
 }

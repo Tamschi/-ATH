@@ -23,6 +23,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using _ATH.Imports;
+using System.Reflection;
 
 namespace _ATH
 {
@@ -30,6 +31,23 @@ namespace _ATH
     {
         static void Main(string[] args)
         {
+            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            var importPath = "./Imports/";
+            importPath = Path.GetFullPath(importPath);
+
+            if (!Directory.Exists(importPath))
+            {
+                Directory.CreateDirectory(importPath);
+            }
+
+            var importFiles = Directory.GetFiles(importPath, "*.dll", SearchOption.AllDirectories);
+            var externalImports = importFiles.SelectMany(file => Assembly.LoadFrom(file).GetTypes().Where(type => typeof(_ATHImport).IsAssignableFrom(type))).ToArray();
+
+            var internalImports = new[] { typeof(ProcessImport) };
+
+            var imports = externalImports.Concat(internalImports).ToArray();
+
             bool run = false;
 
             foreach (var arg in args)
@@ -51,7 +69,7 @@ namespace _ATH
                     try
                     {
                         var program = new _ATHProgram(File.ReadAllText(arg));
-                        program.Compile(Path.GetFileName(arg), new[] { typeof(ProcessImport) });
+                        program.Compile(Path.GetFileName(arg), imports);
                         if (run)
                         {
                             program.Run();
